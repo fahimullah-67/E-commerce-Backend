@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Scandi Tours Gallery</title>
+<title>Interactive Scandi Gallery</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
@@ -24,10 +24,6 @@
   header h1 {
     font-size: 2.5rem;
     margin-bottom: 10px;
-  }
-  header p {
-    font-size: 1.1rem;
-    opacity: 0.8;
   }
 
   .section {
@@ -52,18 +48,46 @@
     border-radius: 3px;
   }
 
+  /* === ADD FORM === */
+  .add-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+  .add-form input {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+    width: 280px;
+  }
+  .add-form button {
+    background: #00aaff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  .add-form button:hover {
+    background: #0090cc;
+  }
+
   /* === GRID GALLERY === */
   .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 30px;
-    justify-items: center;
   }
   .card {
     background: rgba(255,255,255,0.05);
     border-radius: 20px;
     overflow: hidden;
-    position: relative;
     box-shadow: 0 8px 25px rgba(0,0,0,0.4);
     transition: transform 0.4s ease, box-shadow 0.4s ease;
     cursor: pointer;
@@ -80,23 +104,12 @@
   }
   .card-content {
     padding: 20px;
-  }
-  .card-content h3 {
-    margin: 0 0 8px;
-    font-size: 1.1rem;
-  }
-  .card-content p {
     font-size: 0.9rem;
-    color: rgba(255,255,255,0.7);
   }
-  .card-label {
-    position: absolute;
-    bottom: 15px;
-    left: 15px;
-    background: rgba(0,0,0,0.6);
-    padding: 6px 12px;
-    border-radius: 20px;
+  .card-link {
     font-size: 0.8rem;
+    color: #00aaff;
+    text-decoration: none;
   }
 
   /* === HORIZONTAL SLIDER === */
@@ -119,7 +132,6 @@
     box-shadow: 0 8px 25px rgba(0,0,0,0.4);
     flex-shrink: 0;
     cursor: pointer;
-    backdrop-filter: blur(10px);
     transition: transform 0.4s ease;
   }
   .slider-card:hover {
@@ -130,10 +142,6 @@
     height: 220px;
     object-fit: cover;
   }
-  .slider-card .card-content {
-    padding: 16px;
-  }
-
   .slider-btn {
     position: absolute;
     top: 50%;
@@ -146,13 +154,40 @@
     height: 45px;
     border-radius: 50%;
     cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  .slider-btn:hover {
-    background: rgba(255,255,255,0.3);
   }
   .slider-btn.prev { left: 10px; }
   .slider-btn.next { right: 10px; }
+
+  /* === 3D CURVED GALLERY === */
+  .curved-gallery {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px;
+    gap: 10px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .curved-card {
+    width: 200px;
+    height: 300px;
+    border-radius: 25px;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+    background: rgba(255,255,255,0.05);
+    transition: transform 0.4s ease, opacity 0.4s ease;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .curved-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .curved-card:hover {
+    transform: rotateY(0deg) scale(1.1);
+  }
 
   /* === MODAL === */
   .modal {
@@ -180,122 +215,124 @@
 
   @media (max-width: 768px) {
     header h1 { font-size: 2rem; }
-    .card img, .slider-card img { height: 180px; }
     .slider-card { min-width: 240px; }
   }
 </style>
 </head>
 
 <body>
+
 <header>
-  <h1>Discover the World with Scandi Tours</h1>
-  <p>Explore nature, mountains, and adventures in Scandinavian style</p>
+<h1>Scandi Multi-Layout Interactive Gallery</h1>
 </header>
 
-<!-- === Vertical Gallery === -->
+<!-- === Add New Image Form === -->
 <section class="section">
-  <h2 class="section-title">Hot Tours</h2>
-  <div class="gallery-grid">
-    <div class="card" onclick="openModal(this)">
-      <img src="https://i.pinimg.com/1200x/62/06/31/620631d20675c58d7493180cfa477942.jpg" alt="">
-      <span class="card-label">Norway</span>
-      <div class="card-content">
-        <h3>Norway Fjords</h3>
-        <p>Experience the majestic fjords and midnight sun.</p>
-      </div>
-    </div>
-    <div class="card" onclick="openModal(this)">
-      <img src="https://i.pinimg.com/1200x/02/9e/9e/029e9e9c3271feb308084073e88d115d.jpg" alt="">
-      <span class="card-label">Iceland</span>
-      <div class="card-content">
-        <h3>Iceland Volcano Adventure</h3>
-        <p>Witness powerful landscapes shaped by nature’s fire.</p>
-      </div>
-    </div>
-    <div class="card" onclick="openModal(this)">
-      <img src="https://i.pinimg.com/1200x/2b/ab/91/2bab9166891723ccec644fe13fed0fe5.jpg" alt="">
-      <span class="card-label">Lapland</span>
-      <div class="card-content">
-        <h3>Northern Lights Escape</h3>
-        <p>Chase the aurora under Arctic skies.</p>
-      </div>
-    </div>
-  </div>
+<div class="add-form">
+    <input id="imgUrl" type="text" placeholder="Paste image URL...">
+    <input id="imgTitle" type="text" placeholder="Enter title (optional)">
+    <button onclick="addImage()">Add Image</button>
+</div>
+</section>
+
+<!-- === Vertical Grid Gallery === -->
+<section class="section">
+    <h2 class="section-title">Vertical Grid Gallery</h2>
+    <div class="gallery-grid" id="gridGallery"></div>
 </section>
 
 <!-- === Horizontal Slider Gallery === -->
 <section class="section">
-  <h2 class="section-title">Exclusive Horizontal Tours</h2>
+<h2 class="section-title">Horizontal Slider</h2>
   <div class="slider-container">
     <button class="slider-btn prev" onclick="moveSlide(-1)">❮</button>
-    <div class="slider-track" id="sliderTrack">
-      <div class="slider-card" onclick="openModal(this)">
-        <img src="https://i.pinimg.com/1200x/03/3a/fb/033afb9cd2dc7848206b6f78a9097e53.jpg" alt="">
-        <div class="card-content">
-          <h3>Switzerland Alps</h3>
-          <p>Ride through scenic mountain passes and lakes.</p>
-        </div>
-      </div>
-      <div class="slider-card" onclick="openModal(this)">
-        <img src="https://i.pinimg.com/1200x/8a/09/f3/8a09f33bbab8eae63f82e4560ce4d38a.jpg" alt="">
-        <div class="card-content">
-          <h3>Morocco Desert</h3>
-          <p>Feel the warmth of Sahara’s golden dunes.</p>
-        </div>
-      </div>
-      <div class="slider-card" onclick="openModal(this)">
-        <img src="https://i.pinimg.com/1200x/dc/1a/fb/dc1afb9d84b14b45b02c17c94d62f566.jpg" alt="">
-        <div class="card-content">
-          <h3>Yosemite Adventure</h3>
-          <p>Hike the world-famous granite cliffs and waterfalls.</p>
-        </div>
-      </div>
-      <div class="slider-card" onclick="openModal(this)">
-        <img src="https://i.pinimg.com/1200x/60/f4/6a/60f46af01eaa8531cda6a8fc20b38db4.jpg" alt="">
-        <div class="card-content">
-          <h3>Los Lances Beach</h3>
-          <p>Surf, relax, and unwind by the ocean breeze.</p>
-        </div>
-      </div>
-    </div>
+    <div class="slider-track" id="sliderTrack"></div>
     <button class="slider-btn next" onclick="moveSlide(1)">❯</button>
   </div>
 </section>
 
-<!-- === Modal for Image Preview === -->
+<!-- === Curved 3D Gallery === -->
+<section class="section">
+    <h2 class="section-title">3D Curved Card Gallery</h2>
+    <div class="curved-gallery" id="curvedGallery"></div>
+</section>
+
+<!-- === Modal === -->
 <div id="modal" class="modal" onclick="closeModal(event)">
   <span class="close-btn">&times;</span>
-  <img id="modalImage" src="" alt="">
+<img id="modalImage" src="">
 </div>
 
 <script>
-  // === Modal Logic ===
+  const gridGallery = document.getElementById('gr    yId('curvedGallery');
   const modal = document.getElementById('modal');
   const modalImage = document.getElementById('modalImage');
-  function openModal(card) {
-    const img = card.querySelector('img');
+
+  let sliderIndex = 0;
+     function openModal(imgSrc) {
     modal.style.display = 'flex';
-    modalImage.src = img.src;
+    modalImage.src = imgSrc;
   }
   function closeModal(event) {
     if (event.target.id === 'modalImage') return;
     modal.style.display = 'none';
   }
 
-  // === Slider Logic ===
-  let index = 0;
-  function moveSlide(direction) {
-    const track = document.getElementById('sliderTrack');
-    const cards = track.children;
-    const cardWidth = cards[0].offsetWidth + 20;
-    index += direction;
+  function             mage() {
+    const url = d                getElementById('im    rl'    v    ue.    im();
+    const t         = docum        getElementById('imgTitle').valu        im() || 'New        ge';
+    i    (!url    return a lea     en        an image URL.');            // === Add to Grid Gallery ===  const        dCard = docu        .createElement('div');
+    gridCard.className = 'card';
+    gridCa        nnerHTML        
+      <img src="${url}" alt="${title}" onclick="openMod        ${url}')">
+      <d        lass="ca        onten     <h3>${title}</h3>
+            <a h        "${url}" targe        blank" class      k"            } </a>
+        </div>`;  
+    gridGallery.a p pendChild(gridCard);
 
-    const maxIndex = cards.length - Math.floor(window.innerWidth / cardWidth);
-    if (index < 0) index = 0;
-    if (index > maxIndex) index = maxIndex;
+                      Add to Horizontal Slider ===
+                      sliderCard = docum                    teElement('div');
+    sliderCard.className = 'slider-card';
+    sliderCard.inner H TML         
+      <img src="${url}" alt="${title}        click="openModal('${url}')">
+      <        class="card-content">
+        <h3>${title}</h3>
+            <a href="${url}" target="_blank" cla        card-link">${url}</a>
+      </div>`;
+    sliderTrack.appendChild(sliderCard);
 
-    track.style.transform = `translateX(${-index * cardWidth}px)`;
+    // === Add to Curved Gallery ===
+    const curvedCard = document.createElement('div');
+    curvedCard.className = 'curved-card';
+    curvedCard.innerHTML =            mg src="${url}" alt="${title}" oncli                Modal('${url}')">`;
+    c        dGal        .appendChild(curvedCard);
+
+    docume      etElemen      d('imgUrl').value = '';
+      document.g      ementB Title' ) .value = ''; 
   }
+
+  // === S l ider Navigation ===
+  fu nction moveSl        dir) {
+    const cards = sliderTrack.chil        ;
+    const cardWidth = cards[0]?.offsetWidth          || 320;
+    sliderIndex += dir;
+    const maxI    ex =     th.max(0, cards.length - Math.    oor(window.innerWidth / car        th));
+    if (sliderIndex < 0) slide        ex = 0;
+    if (sliderIndex > maxIndex) sliderIndex =        Index;
+    sliderTra        tyle.transform = `translateX(${-sliderIndex * cardWidth}px)`;
+  }
+
+  // === Sample Ini         Images ===
+  const sampleImages = [
+        {url:"https://i.pinimg.com/1200x/62/06/31/620631d2067        d7493180cfa477942.jpg", title:"No rway Fjords"},
+    {url:"https://i.pinimg.    m/120    /02/9e/9e/029e9e9c3271feb308084073    8d115d.jpg", title:"Icel        V olca no"},
+    {url:"https://i.pinimg.com/1200x/2b/ab/91/2bab9166891723ccec644fe13fed0 fe5.jpg", title :"La        d  Aur ora"}
+  ];
+  sampleImages.forEach(img => {
+    document.getElementById('imgUrl' ).value = img.url ;
+         document.getElementById('imgTitle').value = img.title;
+    addImage();
+  });
 </script>
 </body>
 </html>
