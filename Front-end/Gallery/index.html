@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scandi Tours Gallery</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(180deg, #06161d 0%, #0e242e 100%);
+    color: white;
+    overflow-x: hidden;
+  }
+
+  header {
+    text-align: center;
+    padding: 60px 20px 20px;
+  }
+  header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+  }
+  header p {
+    font-size: 1.1rem;
+    opacity: 0.8;
+  }
+
+  .section {
+    padding: 60px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .section-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 30px;
+    text-align: center;
+    position: relative;
+  }
+  .section-title::after {
+    content: '';
+    width: 80px;
+    height: 3px;
+    background: #00aaff;
+    display: block;
+    margin: 10px auto 0;
+    border-radius: 3px;
+  }
+
+  /* === GRID GALLERY === */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
+    justify-items: center;
+  }
+  .card {
+    background: rgba(255,255,255,0.05);
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+  }
+  .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+  }
+  .card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+  }
+  .card-content {
+    padding: 20px;
+  }
+  .card-content h3 {
+    margin: 0 0 8px;
+    font-size: 1.1rem;
+  }
+  .card-content p {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.7);
+  }
+  .card-label {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    background: rgba(0,0,0,0.6);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+  }
+
+  /* === HORIZONTAL SLIDER === */
+  .slider-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    margin-top: 40px;
+  }
+  .slider-track {
+    display: flex;
+    gap: 20px;
+    transition: transform 0.5s ease;
+  }
+  .slider-card {
+    min-width: 300px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+    flex-shrink: 0;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    transition: transform 0.4s ease;
+  }
+  .slider-card:hover {
+    transform: scale(1.05);
+  }
+  .slider-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+  }
+  .slider-card .card-content {
+    padding: 16px;
+  }
+
+  .slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.1);
+    border: none;
+    color: white;
+    font-size: 1.8rem;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  .slider-btn:hover {
+    background: rgba(255,255,255,0.3);
+  }
+  .slider-btn.prev { left: 10px; }
+  .slider-btn.next { right: 10px; }
+
+  /* === MODAL === */
+  .modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    background: rgba(0,0,0,0.9);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .modal img {
+    max-width: 90%;
+    max-height: 80vh;
+    border-radius: 15px;
+  }
+  .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    font-size: 32px;
+    cursor: pointer;
+  }
+
+  @media (max-width: 768px) {
+    header h1 { font-size: 2rem; }
+    .card img, .slider-card img { height: 180px; }
+    .slider-card { min-width: 240px; }
+  }
+</style>
+</head>
+
+<body>
+<header>
+  <h1>Discover the World with Scandi Tours</h1>
+  <p>Explore nature, mountains, and adventures in Scandinavian style</p>
+</header>
+
+<!-- === Vertical Gallery === -->
+<section class="section">
+  <h2 class="section-title">Hot Tours</h2>
+  <div class="gallery-grid">
+    <div class="card" onclick="openModal(this)">
+      <img src="https://i.pinimg.com/1200x/62/06/31/620631d20675c58d7493180cfa477942.jpg" alt="">
+      <span class="card-label">Norway</span>
+      <div class="card-content">
+        <h3>Norway Fjords</h3>
+        <p>Experience the majestic fjords and midnight sun.</p>
+      </div>
+    </div>
+    <div class="card" onclick="openModal(this)">
+      <img src="https://i.pinimg.com/1200x/02/9e/9e/029e9e9c3271feb308084073e88d115d.jpg" alt="">
+      <span class="card-label">Iceland</span>
+      <div class="card-content">
+        <h3>Iceland Volcano Adventure</h3>
+        <p>Witness powerful landscapes shaped by nature’s fire.</p>
+      </div>
+    </div>
+    <div class="card" onclick="openModal(this)">
+      <img src="https://i.pinimg.com/1200x/2b/ab/91/2bab9166891723ccec644fe13fed0fe5.jpg" alt="">
+      <span class="card-label">Lapland</span>
+      <div class="card-content">
+        <h3>Northern Lights Escape</h3>
+        <p>Chase the aurora under Arctic skies.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- === Horizontal Slider Gallery === -->
+<section class="section">
+  <h2 class="section-title">Exclusive Horizontal Tours</h2>
+  <div class="slider-container">
+    <button class="slider-btn prev" onclick="moveSlide(-1)">❮</button>
+    <div class="slider-track" id="sliderTrack">
+      <div class="slider-card" onclick="openModal(this)">
+        <img src="https://i.pinimg.com/1200x/03/3a/fb/033afb9cd2dc7848206b6f78a9097e53.jpg" alt="">
+        <div class="card-content">
+          <h3>Switzerland Alps</h3>
+          <p>Ride through scenic mountain passes and lakes.</p>
+        </div>
+      </div>
+      <div class="slider-card" onclick="openModal(this)">
+        <img src="https://i.pinimg.com/1200x/8a/09/f3/8a09f33bbab8eae63f82e4560ce4d38a.jpg" alt="">
+        <div class="card-content">
+          <h3>Morocco Desert</h3>
+          <p>Feel the warmth of Sahara’s golden dunes.</p>
+        </div>
+      </div>
+      <div class="slider-card" onclick="openModal(this)">
+        <img src="https://i.pinimg.com/1200x/dc/1a/fb/dc1afb9d84b14b45b02c17c94d62f566.jpg" alt="">
+        <div class="card-content">
+          <h3>Yosemite Adventure</h3>
+          <p>Hike the world-famous granite cliffs and waterfalls.</p>
+        </div>
+      </div>
+      <div class="slider-card" onclick="openModal(this)">
+        <img src="https://i.pinimg.com/1200x/60/f4/6a/60f46af01eaa8531cda6a8fc20b38db4.jpg" alt="">
+        <div class="card-content">
+          <h3>Los Lances Beach</h3>
+          <p>Surf, relax, and unwind by the ocean breeze.</p>
+        </div>
+      </div>
+    </div>
+    <button class="slider-btn next" onclick="moveSlide(1)">❯</button>
+  </div>
+</section>
+
+<!-- === Modal for Image Preview === -->
+<div id="modal" class="modal" onclick="closeModal(event)">
+  <span class="close-btn">&times;</span>
+  <img id="modalImage" src="" alt="">
+</div>
+
+<script>
+  // === Modal Logic ===
+  const modal = document.getElementById('modal');
+  const modalImage = document.getElementById('modalImage');
+  function openModal(card) {
+    const img = card.querySelector('img');
+    modal.style.display = 'flex';
+    modalImage.src = img.src;
+  }
+  function closeModal(event) {
+    if (event.target.id === 'modalImage') return;
+    modal.style.display = 'none';
+  }
+
+  // === Slider Logic ===
+  let index = 0;
+  function moveSlide(direction) {
+    const track = document.getElementById('sliderTrack');
+    const cards = track.children;
+    const cardWidth = cards[0].offsetWidth + 20;
+    index += direction;
+
+    const maxIndex = cards.length - Math.floor(window.innerWidth / cardWidth);
+    if (index < 0) index = 0;
+    if (index > maxIndex) index = maxIndex;
+
+    track.style.transform = `translateX(${-index * cardWidth}px)`;
+  }
+</script>
+</body>
+</html>
