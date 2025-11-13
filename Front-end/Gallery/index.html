@@ -7,19 +7,40 @@
     <title>Gallery</title>
 </head>
 <body>
-    <div class="container">
-        <div class="text">
+    <header>
             <h1>Image Gallery</h1>
-            <Click class="prg1">Welcome to the image gallery. Enjoy browsing through the collection! Click on any image to view it
-                in full size.</p>
-        </div>
-        <div class="gallery">
-            <img class="img" src="./public/1.jpg" alt="Image 1" />
-            <img class="img" src="./public/2.jpg" alt="Image 2" />
-            <img class="img" src="./public/3.jpg" alt="Image 3" />
-            <img class="img" src="./public/4.jpg" alt="Image 4" />
-            <img class="img" src="./public/5.jpg" alt="Image 5" />
-        </div>
-    </div>
+            <div class="leftHeader">
+                <label for="categories">Filter by Category:</label>
+                <select name="categories" id="categories">
+                    <option value="all">None</option>
+                    <option value="nature">Nature</option>
+                    <option value="cities">Cities</option>
+                    <option value="people">People</option>
+                </select>
+                <button>+</button>
+            </div>
+            <p class="prg1">Welcome to the image gallery. Enjoy browsing through the collection! Click on any image to view
+                more.
+            </p>
+            </header>
+            <main>
+                <a href="#">
+                    <img src="./public/1.jpg" alt="Nature Image">
+                    <h3>Nature Image</h3>
+                </a>
+                <a href="#">
+                    <img src="./public/2.jpg" alt="Cityscape">
+                    <h3>Cityscape</h3>
+                </a>
+                <a href="#">
+                    <img src="./public/3.jpg" alt="Mountain View">
+                    <h3>Mountain View</h3>
+                </a>
+                <a href="#">
+                    <img src="./public/4.jpg" alt="Beach Sunset">
+                    <h3>Beach Sunset</h3>
+                </a>
+            </main>
+
 </body>
 </html>
