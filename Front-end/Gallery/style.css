@@ -1,0 +1,210 @@
+*{
+  margin: 0;
+  padding: 0;
+  block-size: border-box;
+}
+body{
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  padding: 20px;
+}
+header{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  margin-left: 20px;
+}
+header h1{
+  font-size: 2.5rem;
+  color: #333;
+}
+header .leftHeader{
+  position: absolute;
+  right: 10%;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  padding: 10px;
+}
+header .leftHeader select, header .leftHeader button{
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+header .leftHeader select{
+  background-color: #e0e0e0;
+  color: #333;
+}
+header .leftHeader button{
+  background-color: #007BFF;
+  color: white;
+  cursor: pointer;
+}
+header .leftHeader button:hover{
+  background-color: #0056b3;
+}
+header .leftHeader select:hover{
+  background-color: #d0d0d0;
+}
+
+
+main {
+  /* column-count: 3; */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 20px;
+  column-gap: 20px;
+  row-gap: 30px;
+  border: #33333325 1px solid;
+  border-radius: 10px;
+}
+a{
+  text-decoration: none;
+  color: inherit;
+}
+.card {
+  overflow: hidden;
+  position: relative;
+}
+.card img{
+  width: 100%;
+  height: 238px;
+  display: block;
+  object-fit: cover;
+  object-position: right;
+  transition: object-position 3s;
+}
+img:hover {
+  object-position: top;
+}
+.card h3{
+  padding: 10px;
+  color: white;
+  text-align: center;
+}
+.card .categories{
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: #333333a1;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+}
+.description{
+  display: none;
+  transition: all 1s;
+}
+
+.card:hover .description{
+  position: absolute;
+  bottom: 0px;
+  background-color: #333333a1;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  text-align: center;
+  width: 100%;
+  display: block;
+  transition: all 0.1s;
+}
+
+.formContent{
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.815);
+}
+
+form{
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f0e9e95c;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+
+}
+form input[type="text"], form input[type="file"]{
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  }
+form input[type="text"]:focus, form input[type="file"]:focus{
+  outline: none;
+  border-color: #007BFF;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+form input[type="text"]:hover, form input[type="file"]:hover{
+  border-color: #007BFF;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+form input[type="text"]::placeholder{
+  color: #999;
+}
+form button{
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #28a745;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+}
+form button:hover{
+  background-color: #218838;
+}
+
+.formContent .closeBtn{
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 30px;
+  color: white;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+@media (max-width: 768px) {
+  header{
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  img {
+    height: 100px;
+  }
+  main {   grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 426px){
+  header{
+    display: flex;
+    flex-direction: row !important;
+    align-items: center;
+    gap: 10px;
+  }
+  header .leftHeader{
+    position: static;
+    gap: 5px;
+  }
+
+  img{
+    height: 150px;
+  }
+  main {   grid-template-columns: 1fr; }
+}

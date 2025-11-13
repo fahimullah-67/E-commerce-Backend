@@ -1,46 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Gallery</title>
 </head>
+
 <body>
     <header>
-            <h1>Image Gallery</h1>
-            <div class="leftHeader">
-                <label for="categories">Filter by Category:</label>
-                <select name="categories" id="categories">
-                    <option value="all">None</option>
-                    <option value="nature">Nature</option>
-                    <option value="cities">Cities</option>
-                    <option value="people">People</option>
+        <h1>Image Gallery</h1>
+        <div class="leftHeader">
+            <label for="categories">Filter by Category:</label>
+            <select name="categories" id="categories">
+                <option value="all">None</option>
+                <option value="nature">Nature</option>
+                <option value="city">City</option>
+                <option value="forest">Forest</option>
+                <option value="mountain">Mountain</option>
+                <option value="beach">Beach</option>
                 </select>
-                <button>+</button>
-            </div>
-            <p class="prg1">Welcome to the image gallery. Enjoy browsing through the collection! Click on any image to view
-                more.
-            </p>
-            </header>
-            <main>
-                <a href="#">
-                    <img src="./public/1.jpg" alt="Nature Image">
-                    <h3>Nature Image</h3>
+                <button class="addBtn">+</button>
+                </div>
+        <!-- <p class="prg1">Welcome to the image gallery. Enjoy browsing through the collection! Click on any image to view
+                                                                                                                                                                                                                            more. -->
+        </p>
+        </header>
+        <main>
+            <a class="card" href="./categories/natureimage.html">
+                <img src="./public/1.jpg" alt="Nature Image">
+                <h3 class="categories">Nature Image</h3>
+                <p class="description">Click Enjoy with Nature</p>
                 </a>
-                <a href="#">
-                    <img src="./public/2.jpg" alt="Cityscape">
-                    <h3>Cityscape</h3>
+            <a class="card" href="./categories/cityscape.html">
+                <img src="./public/2.jpg" alt="Cityscape">
+                <h3 class="categories">Cityscape</h3>
+                <p class="description">Explore the urban jungle</p>
                 </a>
-                <a href="#">
-                    <img src="./public/3.jpg" alt="Mountain View">
-                    <h3>Mountain View</h3>
+            <a class="card" href="./categories/mountain.html">
+                <img src="./public/3.jpg" alt="Mountain View">
+                <h3 class="categories">Mountain View</h3>
+                <p class="description">Experience the serenity of mountains</p>
                 </a>
-                <a href="#">
-                    <img src="./public/4.jpg" alt="Beach Sunset">
-                    <h3>Beach Sunset</h3>
+            <a class="card" href="./categories/beachSunset.html">
+                <img src="./public/4.jpg" alt="Beach Sunset">
+                <h3 class="categories">Beach Sunset</h3>
+                <p class="description">Relax with a beach sunset</p>
                 </a>
-            </main>
+                <a class="card" href="./categories/forestTrail.html">
+                    <img src="./public/5.jpg" alt="Forest Trail">
+                    <h3 class="categories">Forest Trail</h3>
+                    <p class="description">Take a walk through the forest trail</p>
+                </a>
+                <a class="card" href="./categories/cityLights.html">
+                    <img src="./public/6.jpg" alt="City Lights">
+                    <h3 class="categories">City Lights</h3>
+                    <p class="description">Discover the city at night</p>
+                </a>
+                </main>
+
+<div class="formContent">
+    <div class="closeBtn">×</div>
+    <form action="#" class="imageForm">
+        <input class="categoryInput" type="text" placeholder="Write Category">
+        <input class="descriptionInput" type="text" placeholder="write 2-3 words dec">
+        <input class="imageInput" type="file" name="image" id="imageUpload" accept="image/*">
+        <button class="submitBtn" type="submit">Add Image</button>
+    </form>
+</div>
+<script src="script.js"></script>
 
 </body>
+
 </html>

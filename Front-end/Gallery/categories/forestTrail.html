@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forest Trail Images</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    <header>
+        <h1>Image Gallery</h1>
+        <div class="leftHeader">
+            <label for="categories">Filter by Category:</label>
+            <select name="categories" id="categories">
+                <option value="all">None</option>
+                <option value="nature">Nature</option>
+                <option value="cities">Cities</option>
+                <option value="people">People</option>
+            </select>
+            <button>+</button>
+        </div>
+        <!-- <p class="prg1">Welcome to the image gallery. Enjoy browsing through the collection! Click on any image to view
+                                                                    more. -->
+        </p>
+        </header>
+
+        <main>
+            <a class="card" href="#">
+                <img src="../public/1.jpg" alt="Nature Image">
+                <h3 class="categories">1</h3>
+                <p class="description">Click Enjoy with Nature</p>
+                </a>
+            <a class="card" href="#">
+                <img src="../public/2.jpg" alt="Cityscape">
+                <h3 class="categories">2</h3>
+                <p class="description">Explore the urban jungle</p>
+                </a>
+            <a class="card" href="#">
+                <img src="../public/3.jpg" alt="Mountain View">
+                <h3 class="categories">3</h3>
+                <p class="description">Experience the serenity of mountains</p>
+                </a>
+            <a class="card" href="#">
+                <img src="../public/4.jpg" alt="Beach Sunset">
+                <h3 class="categories">4</h3>
+                <p class="description">Relax with a beach sunset</p>
+                </a>
+                <a class="card" href="#">
+                    <img src="../public/5.jpg" alt="Forest Trail">
+                    <h3 class="categories">5</h3>
+                    <p class="description">Take a walk through the forest trail</p>
+                </a>
+                <a class="card" href="#">
+                    <img src="../public/6.jpg" alt="City Lights">
+                    <h3 class="categories">6</h3>
+                    <p class="description">Discover the city at night</p>
+                </a>
+                </main>
+        <div class="imageViewer">
+            <span class="closeBtn">&times;</span>
+            <span class="PrevImg"><</span>
+            <img class="viewerImg" src="" alt="Expanded Image">
+            <span class="NextImg">></span>
+        </div>
+        <script src="script.js"></script>
+</body>
+</html>
