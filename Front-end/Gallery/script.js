@@ -53,7 +53,7 @@ function addImg(category, description, imageFile) {
     mainContainer.appendChild(cardDiv);
     const categoryDiv = document.createElement("div");
     categoryDiv.className = "categories";
-    categoryDiv.style.display = "none";
+    categoryDiv.style.display = "block";
     categoryDiv.textContent = category;
     cardDiv.appendChild(categoryDiv);
   };
