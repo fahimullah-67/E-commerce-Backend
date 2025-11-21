@@ -2,18 +2,20 @@ import express, { json } from 'express';
 import dotenv from 'dotenv';
 import mongoose, { connect } from 'mongoose';
 import productRoute from "./src/routes/product.route.js"
+import authRoute from "./src/routes/auth.route.js";
 
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 50000
+const PORT = process.env.PORT || 50000;
 
+app.use(express.json());
 
-app.use(express.json)
-app.get('/', (req, res) => {
-    res,send("Ecommerce is Running... ")
-})
-app.use('api/products', productRoute)
+app.get("/", (req, res) => {
+  res.send("Ecommerce is Running... ");
+});
+app.use("/api/auth", authRoute);
+app.use("/api/products", productRoute);
 
 
 const connectDB = async () => {

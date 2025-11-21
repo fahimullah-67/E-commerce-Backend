@@ -42,3 +42,16 @@ const productSchema = new moongoose.Schema(
 
 const Product = moongoose.model("Product", productSchema);
 export default Product;
+
+
+
+// product post testing 
+// http://localhost:7000/api/
+// {
+//     "name": "Mobile Vivo",
+//     "price":"23432",
+//     "description": "Vivo Mobile new  models",
+//     "category": "Mobile",
+//     "isAvailable": "1",
+//     "stockQuantity":"4"
+// }
