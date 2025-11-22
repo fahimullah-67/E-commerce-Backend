@@ -3,7 +3,8 @@ import dotenv from 'dotenv';
 import mongoose, { connect } from 'mongoose';
 import productRoute from "./src/routes/product.route.js"
 import authRoute from "./src/routes/auth.route.js";
-
+import cartRoute from "./src/routes/cart.route.js";
+import orderRoute from "./src/routes/order.routes.js";
 dotenv.config();
 
 const app = express();
@@ -16,7 +17,8 @@ app.get("/", (req, res) => {
 });
 app.use("/api/auth", authRoute);
 app.use("/api/products", productRoute);
-
+app.use("/api/carts", cartRoute);
+app.use("/api/orders/", orderRoute);
 
 const connectDB = async () => {
     try {

@@ -1,9 +1,10 @@
 import express, { Router } from 'express';
 import Product from '../models/product.model.js';
+import { verifyTokenAndAdmin } from "../middleware/verifyToken.middleware.js";
 
 const router = Router();
 
-router.post("/add", async (req, res) => {
+router.post("/add", verifyTokenAndAdmin, async (req, res) => {
   try {
     const newProduct = Product(req.body);
     const savedProduct = await newProduct.save();
@@ -11,7 +12,7 @@ router.post("/add", async (req, res) => {
 
     res.status(200).json(savedProduct);
   } catch (error) {
-    res.json(500).json(error);
+    res.status(500).json(error).statusMessage("Product not created!");
   }
 });
 
@@ -40,7 +41,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
   try {
     const updatedProduct = await Product.findByIdAndUpdate(
       req.params.id,
@@ -55,13 +56,13 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-router.delete('/:id', async (req, res) => {
-    try {
-        await Product.findByIdAndDelete(req.params.id);
-        res.status(200).json("Product has been deleted");
-    } catch (err) {
-        res.status(500).json(err);
-    }
+router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
+  try {
+    await Product.findByIdAndDelete(req.params.id);
+    res.status(200).json("Product has been deleted");
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 export default router;
