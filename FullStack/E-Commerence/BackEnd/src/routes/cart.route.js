@@ -1,7 +1,7 @@
 // routes/cart.js
 
 import express, { Router} from 'express';
-import Cart from '../models/cart.model'; // path to your Cart schema
+import Cart from '../models/cart.model.js'; // path to your Cart schema
 import { verifyToken, verifyTokenAndAuthorization } from '../middleware/verifyToken.middleware.js';
 
 const router = Router();
