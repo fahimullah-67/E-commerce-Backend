@@ -16,7 +16,7 @@ router.post("/add", verifyTokenAndAdmin, async (req, res) => {
   }
 });
 
-router.get("/getProduct", async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     // Simple fetch all. Later, you can add query logic for filtering/sorting:
     // const products = await Product.find(req.query).sort({ createdAt: -1 });
