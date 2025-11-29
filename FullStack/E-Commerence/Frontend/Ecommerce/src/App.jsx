@@ -15,6 +15,11 @@ import OrderDetailPage from "./pages/OrderDetailPage";
 import CategoriesPage from "./pages/CategoriesPage";
 import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
+import AdminRoute from "./utils/AdminRoute";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import ProductForm from "./pages/admin/ProductForm";
+import OrderManagementPage from "./pages/admin/OrderManagementPage";
+import AdminProductListPage from "./pages/admin/AdminProductListPage";
 
 function App() {
   return (
@@ -43,6 +48,19 @@ function App() {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/about-us" element={<AboutPage />} />
         <Route path="/contact-us" element={<ContactPage />} />
+
+        {/*admin Page Handle*/}
+        <Route path="/admin" element={<AdminRoute />}>
+          <Route index element={<AdminDashboard />} />
+
+          {/* Product Management Routes */}
+          <Route path="products" element={<AdminProductListPage />} />
+          <Route path="products/new" element={<ProductForm />} />
+          <Route path="products/edit/:id" element={<ProductForm />} />
+
+          {/*  Order Management Route ⬅️ */}
+          <Route path="orders" element={<OrderManagementPage />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

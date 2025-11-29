@@ -4,7 +4,7 @@ import { verifyTokenAndAdmin } from "../middleware/verifyToken.middleware.js";
 
 const router = Router();
 
-router.post("/add", verifyTokenAndAdmin, async (req, res) => {
+router.post("/", verifyTokenAndAdmin, async (req, res) => {
   try {
     const newProduct = Product(req.body);
     const savedProduct = await newProduct.save();

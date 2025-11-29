@@ -23,7 +23,9 @@ const verifyToken = (req, res, next) => {
 // Middleware to check if the user is authorized (can be reused for updates/deletes)
 const verifyTokenAndAuthorization = (req, res, next) => {
   verifyToken(req, res, () => {
-    if (req.user.id === req.params.userId || req.user.isAdmin) {
+    console.log("role of admin", req.user.role);
+
+    if (req.user.id === req.params.userId || req.user.role === "admin") {
       next();
     } else {
       res.status(403).json("You are not allowed to do that!");
@@ -34,9 +36,12 @@ const verifyTokenAndAuthorization = (req, res, next) => {
 // Middleware to check if the user is an Admin (for product creation/updates)
 const verifyTokenAndAdmin = (req, res, next) => {
   verifyToken(req, res, () => {
-    if (req.user.isAdmin) {
+    if (req.user.role === "admin") {
+      console.log("role of admin", req.user.role);
+
       next();
     } else {
+      console.log("role of admin", req.user.role);
       res
         .status(403)
         .json("You must be an Administrator to perform this action!");

@@ -109,4 +109,37 @@ router.get("/:id", verifyToken, async (req, res) => {
   }
 });
 
+// ROUTE 3: Admin ORDER GET
+router.get("/admin", verifyTokenAndAdmin, async (req, res) => {
+  console.log("Admin access confirmed for user ID:", req.user.id);
+  try {
+    const orders = await Order.find().sort({ createdAt: -1 }); // Newest orders first
+    res.status(200).json(orders);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// --- ROUTE 5 (ADMIN): Update Order Status ---
+// Method: PUT /api/orders/:id (Protected)
+router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
+  try {
+    const updatedOrder = await Order.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: { status: req.body.status },
+      },
+      { new: true } // Return the updated document
+    );
+
+    if (!updatedOrder) {
+      return res.status(404).json("Order not found.");
+    }
+
+    res.status(200).json(updatedOrder);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 export default router;
