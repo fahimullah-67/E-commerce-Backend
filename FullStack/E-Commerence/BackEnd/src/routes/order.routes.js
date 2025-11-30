@@ -5,6 +5,55 @@ import Product from '../models/product.model.js';  // Product Schema
 import {   verifyToken, verifyTokenAndAuthorization, verifyTokenAndAdmin } from '../middleware/verifyToken.middleware.js';
 
 const router = Router();
+
+
+
+
+// --- ROUTE 4 (ADMIN): Get ALL Orders ---
+// Method: GET /api/orders/admin (Protected)
+router.get("/admin", verifyTokenAndAdmin, async (req, res) => {
+  try {
+    const orders = await Order.find()
+      // Use .lean() to return fast, plain JavaScript objects
+      // Use totalPrice for sorting, assuming this is the final schema name
+      .lean()
+      .sort({ createdAt: -1 });
+
+    res.status(200).json(orders);
+  } catch (err) {
+    // Log the crash details on the server terminal
+    console.error("ADMIN GET ALL ORDERS CRASH:", err);
+    // Return a generic error message to the client
+    res
+      .status(500)
+      .json({
+        message: "An internal server error occurred while retrieving orders.",
+      });
+  }
+});
+
+// --- ROUTE 5 (ADMIN): Update Order Status ---
+// Method: PUT /api/orders/:id (Protected)
+router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
+  try {
+    const updatedOrder = await Order.findByIdAndUpdate(
+      req.params.id,
+      // CRITICAL: Ensure we are only setting the 'status' field
+      { $set: { status: req.body.status } },
+      { new: true }
+    );
+
+    if (!updatedOrder) {
+      return res.status(404).json("Order not found.");
+    }
+
+    res.status(200).json(updatedOrder);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+
 // ROUTE 1: Create new Order
 // Method: POST /api/orders
 router.post("/", verifyToken, async (req, res) => {
@@ -99,7 +148,7 @@ router.get("/:id", verifyToken, async (req, res) => {
     }
 
     // Authorization check: User must be the owner OR an Admin
-    if (order.userId.toString() !== req.user.id && !req.user.isAdmin) {
+    if (order.userId.toString() !== req.user.id && req.user.role !== "admin") {
       return res.status(403).json("You are not authorized to view this order.");
     }
 
@@ -109,37 +158,5 @@ router.get("/:id", verifyToken, async (req, res) => {
   }
 });
 
-// ROUTE 3: Admin ORDER GET
-router.get("/admin", verifyTokenAndAdmin, async (req, res) => {
-  console.log("Admin access confirmed for user ID:", req.user.id);
-  try {
-    const orders = await Order.find().sort({ createdAt: -1 }); // Newest orders first
-    res.status(200).json(orders);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-// --- ROUTE 5 (ADMIN): Update Order Status ---
-// Method: PUT /api/orders/:id (Protected)
-router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
-  try {
-    const updatedOrder = await Order.findByIdAndUpdate(
-      req.params.id,
-      {
-        $set: { status: req.body.status },
-      },
-      { new: true } // Return the updated document
-    );
-
-    if (!updatedOrder) {
-      return res.status(404).json("Order not found.");
-    }
-
-    res.status(200).json(updatedOrder);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
 
 export default router;
