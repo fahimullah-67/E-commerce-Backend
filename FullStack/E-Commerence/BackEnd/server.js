@@ -5,6 +5,8 @@ import productRoute from "./src/routes/product.route.js"
 import authRoute from "./src/routes/auth.route.js";
 import cartRoute from "./src/routes/cart.route.js";
 import orderRoute from "./src/routes/order.routes.js";
+import contactRoute from "./src/routes/contact.route.js";
+
 dotenv.config();
 
 const app = express();
@@ -19,6 +21,7 @@ app.use("/api/auth", authRoute);
 app.use("/api/products", productRoute);
 app.use("/api/carts", cartRoute);
 app.use("/api/orders/", orderRoute);
+app.use("/api/contact", contactRoute);
 
 const connectDB = async () => {
     try {
