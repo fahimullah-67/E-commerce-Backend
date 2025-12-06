@@ -34,7 +34,7 @@ const ProjectSchema = new mongoose.Schema({
     }
 }, { timestamps: true });
 
-// Optional: Add a pre-delete hook to clean up associated lists and cards
+// Add a pre-delete hook to clean up associated lists and cards
 ProjectSchema.pre('remove', async function(next) {
     // This assumes List and Card models exist and reference Project
     await this.model('List').deleteMany({ project: this._id });
