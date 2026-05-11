@@ -51,7 +51,6 @@ const CheckoutAddressPage = () => {
         // 1. Save the selected/new address to the context
         updateCheckoutData({ shippingAddress: finalAddress });
 
-        // 2. Navigate to the next step (Payment/Review)
         navigate('/checkout/payment');
     };
 
