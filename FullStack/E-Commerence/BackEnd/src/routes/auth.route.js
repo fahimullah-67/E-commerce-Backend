@@ -13,15 +13,13 @@ const generateToken = (user) => {
     );
 };
 
-// --- ROUTE 1: REGISTER USER ---
+// --- ROUTE 1: REGISTER USER --- 
 // Method: POST /api/auth/register
 router.post('/register', async (req, res) => {
     try {
-        // 1. Hash the password
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
-        // 2. Create the new user object
         const newUser = new User({
             username: req.body.username,
             email: req.body.email,
@@ -31,7 +29,7 @@ router.post('/register', async (req, res) => {
         // 3. Save to database
         const savedUser = await newUser.save();
         
-        // 4. Return success response (excluding password)
+        // 4. Return success response
         res
         .status(201)
         .json({
