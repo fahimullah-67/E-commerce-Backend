@@ -2,6 +2,7 @@ import  mongoose from 'mongoose';
 
 const CardSchema = new mongoose.Schema({
     title: {
+        
         type: String,
         required: [true, 'Task title is required'],
         trim: true,
@@ -53,10 +54,15 @@ const CardSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 // Optional: Add a pre-delete hook to clean up associated comments
+
 CardSchema.pre('remove', async function(next) {
     await this.model('Comment').deleteMany({ card: this._id });
     next();
 });
+
+// await Card.findByIdAndDelete(id);
+// await Comment.deleteMany({ card: id });
+
 
 const Card = mongoose.model('Card', CardSchema);
 export default Card;
