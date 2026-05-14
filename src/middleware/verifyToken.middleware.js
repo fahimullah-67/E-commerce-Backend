@@ -1,8 +1,7 @@
 import jwt from "jsonwebtoken";
 
-//verify token
 const verifyToken = (req, res, next) => {
-  // 1. Get the  "Bearer <token>"
+
   const authHeader = req.headers.token;
 
   if (authHeader) {
@@ -20,7 +19,6 @@ const verifyToken = (req, res, next) => {
   }
 };
 
-// Middleware to check if the user is authorized (can be reused for updates/deletes)
 const verifyTokenAndAuthorization = (req, res, next) => {
   verifyToken(req, res, () => {
     console.log("role of admin", req.user.role);
@@ -33,7 +31,6 @@ const verifyTokenAndAuthorization = (req, res, next) => {
   });
 };
 
-// Middleware to check if the user is an Admin (for product creation/updates)
 const verifyTokenAndAdmin = (req, res, next) => {
   verifyToken(req, res, () => {
     if (req.user.role === "admin") {

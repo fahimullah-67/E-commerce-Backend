@@ -1,6 +1,6 @@
-import moongoose from 'mongoose';
+import mongoose from 'mongoose';
 
-const productSchema = new moongoose.Schema(
+const productSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -30,7 +30,6 @@ const productSchema = new moongoose.Schema(
       type: String,
     },
     isAvailable: {
-      // Quick toggle for front-end to show availability
       type: Boolean,
       default: true,
     },
@@ -40,7 +39,7 @@ const productSchema = new moongoose.Schema(
   }
 );
 
-const Product = moongoose.model("Product", productSchema);
+const Product = mongoose.model("Product", productSchema);
 export default Product;
 
 

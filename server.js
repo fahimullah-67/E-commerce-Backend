@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 50000;
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.send("Ecommerce is Running... ");
+  res.send("E-commerce is Running... ");
 });
 app.use("/api/auth", authRoute);
 app.use("/api/products", productRoute);
@@ -24,21 +24,17 @@ app.use("/api/orders/", orderRoute);
 app.use("/api/contact", contactRoute);
 
 const connectDB = async () => {
-    try {
-        await mongoose.connect(process.env.MONGO_URI)
-        console.log('MongoDB connected successfully');        
-    }catch (err) {
-        console.error('❌ MongoDB Connection Failed:', err.message);
-        process.exit(1); // Exit process with failure
-    }
-}
+  try {
+    await mongoose.connect(process.env.MONGO_URI);
+    console.log("MongoDB connected successfully");
+  } catch (err) {
+    console.error(" MongoDB Connection Failed:", err.message);
+    process.exit(1);
+  }
+};
 connectDB()
 
 
-//RouterAPI
-
-
-// start server 
 app.listen(PORT, () => {
     console.log(`Server is Running on ${PORT}`);
 })

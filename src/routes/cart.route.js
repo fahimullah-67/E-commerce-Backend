@@ -1,18 +1,14 @@
-// routes/cart.js
-
 import express, { Router} from 'express';
-import Cart from '../models/cart.model.js'; // path to your Cart schema
+import Cart from '../models/cart.model.js';
 import { verifyToken, verifyTokenAndAuthorization } from '../middleware/verifyToken.middleware.js';
 
 const router = Router();
 
-// ROUTE 1: Create or add
-// Method: POST /api/carts/
+
 router.post("/", verifyToken, async (req, res) => {
   const { productId, quantity } = req.body;
   const userId = req.user.id;
 
-  // 🚨 DEBUG: Check if IDs are present and valid
   console.log("User ID from Token:", userId);
   console.log("Product ID from Body:", productId);
 
@@ -32,7 +28,7 @@ router.post("/", verifyToken, async (req, res) => {
       cart = await cart.save();
       res.status(200).json(cart);
     } else {
-      // No cart exists: Create a new cart
+
       const newCart = new Cart({
         userId,
         products: [{ productId, quantity }],
@@ -45,8 +41,8 @@ router.post("/", verifyToken, async (req, res) => {
   }
 });
 
-// ROUTE 2: Update Cart Item Quantity or remove quantity is 0
-// Method: PUT /api/carts/:userId
+
+
 router.put("/:userId", verifyTokenAndAuthorization, async (req, res) => {
   const { productId, quantity } = req.body;
   const userId = req.params.userId;
@@ -76,8 +72,7 @@ router.put("/:userId", verifyTokenAndAuthorization, async (req, res) => {
   }
 });
 
-// --- ROUTE 3: Get User Cart ---
-// Method: GET /api/carts/find/:userId
+
 router.get("/find/:userId", verifyTokenAndAuthorization, async (req, res) => {
   try {
     // Use .populate('products.productId') to retrieve product details from the Product model
@@ -85,7 +80,7 @@ router.get("/find/:userId", verifyTokenAndAuthorization, async (req, res) => {
       "products.productId"
     );
     if (!cart) {
-      // Return an empty cart object if none is found
+
       return res.status(200).json({
         userId: req.params.userId,
         products: [],
@@ -97,7 +92,7 @@ router.get("/find/:userId", verifyTokenAndAuthorization, async (req, res) => {
   }
 });
 
-// --- ROUTE 4: Delete Cart Item/Clear Cart ---
+
 router.delete('/:userId', verifyTokenAndAuthorization, async (req, res) => {
     try {
         await Cart.findOneAndDelete({ userId: req.params.userId });
