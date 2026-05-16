@@ -1,5 +1,6 @@
 import express, { json } from 'express';
 import dotenv from 'dotenv';
+import cors from 'cors';
 import mongoose, { connect } from 'mongoose';
 import productRoute from "./src/routes/product.route.js"
 import authRoute from "./src/routes/auth.route.js";
@@ -13,6 +14,7 @@ const app = express();
 const PORT = process.env.PORT || 50000;
 
 app.use(express.json());
+app.use(cors());
 
 app.get("/", (req, res) => {
   res.send("E-commerce is Running... ");
